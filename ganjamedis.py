@@ -10,20 +10,12 @@ def clear():
     else:
         _=system('clear')
 
-#def randomChar(digit):
-#    voucherCreate=''.join(random.choice(string.ascii_letters)for x in range(digit))
+def randomChar(digit,voucher):
+    voucherCreate=''.join(random.choice(string.ascii_letters)for x in range(digit))
+    voucher=voucherCreate.upper()
+    return voucher
 
-def voucherLoad():
-    file_pocer=open('pocer.txt','r')
-    voucher=[]
-    for x in file_pocer.readlines():
-        a=0
-        if len(x)>6:
-            y=x.strip('\n')
-            voucher.append(y)
-        else:
-            voucher.append(x)
-        a+=1
+    
 
 class dagangan():
     hargaTotal=0
@@ -43,27 +35,26 @@ class dagangan():
     def jumlahHarga(self):
         for x in range(0,len(dagangan.hargaBarang)):
             dagangan.hargaTotal=dagangan.hargaTotal+dagangan.hargaBarang[x]
-        print(dagangan.hargaTotal)
         
 class makanan(dagangan):
     def __init__(self):
         print('-----------------------')
     def menuMakanan(self):
-        print('~DAFTAR MENU MAKANAN~\n')
-        print('1. Sop Iga     Rp.25000\n'
-              '2. Sate Ayam   Rp.15000\n'
-              '3. Soto Ayam   Rp.13000\n'
-              '4. Nasi Goreng Rp.10000\n'
-              '5. Gado gado   Rp.10000\n'
-              '6. Ketoprak    Rp.10000\n'
-              '7. Nasi Pecel  Rp.7000\n'
-              '8. Nasi        Rp.4000\n'
-              '0. SELESAI')
-        print('-----------------------')
         a=True
         harga=0
         c=''
         while a is True:
+            print('~DAFTAR MENU MAKANAN~\n')
+            print('1. Sop Iga     Rp.25000\n'
+                  '2. Sate Ayam   Rp.15000\n'
+                  '3. Soto Ayam   Rp.13000\n'
+                  '4. Nasi Goreng Rp.10000\n'
+                  '5. Gado gado   Rp.10000\n'
+                  '6. Ketoprak    Rp.10000\n'
+                  '7. Nasi Pecel  Rp.7000\n'
+                  '8. Nasi        Rp.4000\n'
+                  '0. KEMBALI')
+            print('-----------------------')
             try:
                 pilihMakanan=int(input('\nPilih Nomor Makanan: '))
                 if pilihMakanan==1:
@@ -110,8 +101,10 @@ class makanan(dagangan):
                         print('Masukan Jumlah Yang Dipesan !!!')
             except ValueError:
                 print('Pilih dari 0-8 !!!')
+            clear()
             print('Pesanan anda saat ini: ')
             self.listPesananMak()
+            print('\n')
             
     def listPesananMak(self):
         for x in range(0,len(dagangan.makananDipesan)):
@@ -121,21 +114,21 @@ class minuman(dagangan):
     def __init__(self):
         print('')
     def menuMinuman(self):
-        print('~DAFTAR MENU MINUMAN~\n')
-        print('1. Sop Buah    Rp.15000\n'
-              '2. Sari Kurma  Rp.15000\n'
-              '3. Es Teler    Rp.13000\n'
-              '4. Jus Alpukat Rp.8000\n'
-              '5. Es Jeruk    Rp.7000\n'
-              '6. Es Teh      Rp.5000\n'
-              '7. Air Mineral Rp.4000\n'
-              '8. Ale ale     Rp.2000\n'
-              '0. SELESAI')
-        print('-----------------------')
         a=True
         harga=0
         c=''
         while a is True:
+            print('~DAFTAR MENU MINUMAN~\n')
+            print('1. Sop Buah    Rp.15000\n'
+                  '2. Sari Kurma  Rp.15000\n'
+                  '3. Es Teler    Rp.13000\n'
+                  '4. Jus Alpukat Rp.8000\n'
+                  '5. Es Jeruk    Rp.7000\n'
+                  '6. Es Teh      Rp.5000\n'
+                  '7. Air Mineral Rp.4000\n'
+                  '8. Ale ale     Rp.2000\n'
+                  '0. KEMBALI')
+            print('-----------------------')
             try:
                 pilihMakanan=int(input('\nPilih Nomor Minuman: '))
                 if pilihMakanan==1:
@@ -181,19 +174,27 @@ class minuman(dagangan):
                         print('Masukan Jumlah Yang Dipesan !!!')
             except ValueError:
                 print('Pilih dari 0-8 !!!')
+            clear()
             print('Pesanan anda saat ini: ')
             self.listPesananMin()
+            print('\n')
     def listPesananMin(self):
         for x in range(0,len(dagangan.minumanDipesan)):
             print('- {} @{} x {}(qty)'.format(dagangan.minumanDipesan[x],dagangan.hargaMinuman[x],dagangan.jumlahMinuman[x]))
-
-
+voucherNew=''
+voucherNew=randomChar(6,voucherNew)
 v=True
+bayar=''
+bayarUang=int
+punya=''
+kembali=int
+voucher=[]
 while v==True:
+    clear()
     pilihan=''
     print('~SELAMAT DATANG DI KANTIN WWE~\n'
           '-----------------------\n'
-          'Pilih apa yang mau dipesan:\na. Makanan   |   b. Minuman   |   c.SELSAI')
+          'Pilih apa yang mau dipesan:\na. Makanan   |   b. Minuman   |   c.SELSAI   |   d.BATAL')
     pilihan=str(input('Pilihan anda: '))
     if pilihan=='a':
         pembeli=makanan()
@@ -206,6 +207,37 @@ while v==True:
         pembeli.listPesananMak()
         pembeli=minuman()
         pembeli.listPesananMin()
+        pembeli.jumlahHarga()
+        print('Total Pembelian anda adalah Rp.{}'.format(pembeli.hargaTotal))
+        bayar=input('Lanjutkan Pembayaran [y] ?: ')
+        if bayar=='y':
+            bayar=int(input('Masukan uang: '))
+            #voucherLoad(voucher)
+            file_pocer=open('pocer.txt','r')
+            for x in file_pocer.readlines():
+                a=0
+                if len(x)>6:
+                    y=x.strip('\n')
+                    voucher.append(y)
+                else:
+                    voucher.append(x)
+                a+=1
+            punya=input('Masukan kode voucher/[n]: ')
+            kembali=bayar-pembeli.hargaTotal
+            if punya=='n':
+                print('Kembali:'
+                      '{}-{}=Rp.{}'.format(bayar,pembeli.hargaTotal,kembali))
+                print(tagihan)
+            elif punya in voucher:
+                print('Kembali:'
+                      '{}+20000(potongan)-{}=Rp.{}'.format(bayar,pembeli.hargaTotal,kembali))
+                kembali=bayar+20000-pembeli.hargaTotal
+            else:
+                print('Kode Voucher Salah')
+        if pembeli.hargaTotal >=200000:
+            print('Selamat anda mendapat voucher cashback Rp.20000 dangan kode {}'.format(voucherNew))
+        v=False
+    elif pilihan=='d':
         v=False
     else:
         print('Mohon masukan a/b/c')

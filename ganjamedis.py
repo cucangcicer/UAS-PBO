@@ -220,6 +220,7 @@ while v==True:
                 else:
                     voucher.append(x)
                 a+=1
+            file_pocer.close()
             punya=input('Masukan kode voucher/[n]: ')
             clear()
             print('Mengecek database...')
@@ -230,15 +231,19 @@ while v==True:
                       '{}-{}=Rp.{}'.format(bayar,pembeli.hargaTotal,kembali))
             elif punya in voucher:
                 print('Selamat Voucher anda berhasil')
+                kembali=bayar+20000-pembeli.hargaTotal
                 print('Kembali:'
                       '{}+20000(potongan)-{}=Rp.{}'.format(bayar,pembeli.hargaTotal,kembali))
-                kembali=bayar+20000-pembeli.hargaTotal
             else:
                 print('Kode Voucher Salah')
         if pembeli.hargaTotal >=200000:
-            print('Selamat anda mendapat voucher cashback Rp.20000 dangan kode {}'.format(voucherNew))
+            print('Selamat anda mendapat voucher potongan Rp.20000 dangan kode {}'.format(voucherNew))
+            file_pocer=open('pocer.txt','a')
+            file_pocer.write('\n{}'.format(voucherNew))
+            file_pocer.close()
         v=False
     elif pilihan=='d':
         v=False
     else:
         print('Mohon masukan a/b/c')
+

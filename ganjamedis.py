@@ -246,4 +246,3 @@ while v==True:
         v=False
     else:
         print('Mohon masukan a/b/c')
-

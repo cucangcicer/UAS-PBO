@@ -2,7 +2,7 @@ import time
 import string
 import random
 from os import system,name
-import getpass
+#import getpass
 
 def clear():
     if name=='nt':
@@ -14,8 +14,6 @@ def randomChar(digit,voucher):
     voucherCreate=''.join(random.choice(string.ascii_letters)for x in range(digit))
     voucher=voucherCreate.upper()
     return voucher
-
-    
 
 class dagangan():
     hargaTotal=0
@@ -223,12 +221,15 @@ while v==True:
                     voucher.append(x)
                 a+=1
             punya=input('Masukan kode voucher/[n]: ')
+            clear()
+            print('Mengecek database...')
+            time.sleep(1)
             kembali=bayar-pembeli.hargaTotal
             if punya=='n':
                 print('Kembali:'
                       '{}-{}=Rp.{}'.format(bayar,pembeli.hargaTotal,kembali))
-                print(tagihan)
             elif punya in voucher:
+                print('Selamat Voucher anda berhasil')
                 print('Kembali:'
                       '{}+20000(potongan)-{}=Rp.{}'.format(bayar,pembeli.hargaTotal,kembali))
                 kembali=bayar+20000-pembeli.hargaTotal
@@ -241,4 +242,3 @@ while v==True:
         v=False
     else:
         print('Mohon masukan a/b/c')
-

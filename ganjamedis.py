@@ -1,8 +1,8 @@
 import time
+import datetime
 import string
 import random
 from os import system,name
-#import getpass
 
 def clear():
     if name=='nt':
@@ -27,6 +27,7 @@ class dagangan():
     jumlahMinuman=[]
     minumanDipesan=[]
     hargaMinuman=[]
+    trxFile=[]
     def __init__(self):
         print('-----------------------')
 
@@ -61,7 +62,7 @@ class makanan(dagangan):
                 harga=y[pilihMakanan-1]
                 if pilihMakanan==0:
                     a=False
-                elif pilihMakanan not in range(0,len(t)):
+                elif pilihMakanan not in range(0,len(t)+1):
                     print('pilih dari 0-8')
                     
                 try:
@@ -74,9 +75,11 @@ class makanan(dagangan):
                             dagangan.jumlahMakanan.append(dagangan.jumlahBarang)
                             dagangan.makananDipesan.append(c)
                             dagangan.hargaMakanan.append(harga)
-                    
+                            dagangan.trxFile.append('- {} @{} x {}(qty)'.format(c,harga,dagangan.jumlahBarang))
+                                        
                 except ValueError:
                         print('Masukan Jumlah Yang Dipesan !!!')
+                                                    
             except ValueError:
                 print('Pilih dari 0-8 !!!')
             clear()
@@ -115,7 +118,7 @@ class minuman(dagangan):
                 harga=y[pilihMinuman-1]
                 if pilihMinuman==0:
                     a=False
-                elif pilihMinuman not in range(0,len(t)):
+                elif pilihMinuman not in range(0,len(t)+1):
                     print('pilih dari 0-8')
                     
                 try:
@@ -128,6 +131,7 @@ class minuman(dagangan):
                             dagangan.jumlahMinuman.append(dagangan.jumlahBarang)
                             dagangan.minumanDipesan.append(c)
                             dagangan.hargaMinuman.append(harga)
+                            dagangan.trxFile.append('- {} @{} x {}(qty)'.format(c,harga,dagangan.jumlahBarang))
                 except ValueError:
                         print('Masukan Jumlah Yang Dipesan !!!')
             except ValueError:
@@ -139,6 +143,7 @@ class minuman(dagangan):
     def listPesananMin(self):
         for x in range(0,len(dagangan.minumanDipesan)):
             print('- {} @{} x {}(qty)'.format(dagangan.minumanDipesan[x],dagangan.hargaMinuman[x],dagangan.jumlahMinuman[x]))
+    
 voucherNew=''
 voucherNew=randomChar(6,voucherNew)
 v=True
@@ -202,9 +207,17 @@ while v==True:
             file_pocer=open('pocer.txt','a')
             file_pocer.write('\n{}'.format(voucherNew))
             file_pocer.close()
+        if v==True:
+            dt=(datetime.datetime.now().strftime("%d/%m/%y %H:%M:%S"))
+            file_transaksi=open('transaksi.txt','a')
+            file_transaksi.write('{}'.format(dt))
+            for x in range(0,len(pembeli.trxFile)):
+                trx='\n'+dagangan.trxFile[x]
+                file_transaksi.write('{}'.format(trx))
+            file_transaksi.write('\nTotal Pembelian Rp.{}\n'.format(pembeli.hargaTotal))
+            file_transaksi.close()
         v=False
     elif pilihan=='d':
         v=False
     else:
         print('Mohon masukan a/b/c')
-

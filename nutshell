@@ -1,0 +1,21 @@
+Aplikasi Project OOP Institut Teknologi Indonesia
+
+Nutshell:
+-Merupakan aplikasi pembelian jajanan kantin, implementasi masih sebatas command line. Konsepnya seperti vending machine.
+-Kode voucher dapat didapat setelah transaksi minimal Rp.200000, voucer bernilai potongan sebesar Rp.20000
+-List kode voucher yang dapat dipakai terdapat pada pocer.txt
+-File transaksi.txt berguna sebagai record transaksi berhasil yang telah digunakan pada aplikasi ini
+
+Requirement:
+-python 3
+-Masukan semua file(ganjamedis.py, transaksi.txt dan pocer.txt) kedalam satu folder
+
+Alhamdulillah, dan Terima kasih kepada kelompok yang sudah berusaha berkontribusi demi kesempurnaan program ini.
+Kelompok:
+- Bayu Krisna
+- Disman
+- Muchlis
+- Rangga
+- Rifki
+- Yoga
+- Zefanya
